@@ -26,6 +26,7 @@
                 this.AddProduct("IPhone X");
                 this.AddProduct("Magic Mouse");
                 this.AddProduct("IWatch Series 4");
+                await this.context.SaveChangesAsync();
             }
         }
 

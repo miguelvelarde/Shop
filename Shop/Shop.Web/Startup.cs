@@ -32,6 +32,8 @@ namespace Shop.Web
                         "DefaultConnection"));
             });
 
+            services.AddTransient<SeedDb>();
+
             services.AddControllersWithViews();
         }
 
