@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Entities;
 
-    public class Repository
+    public class Repository : IRepository
     {
         private readonly DataContext context;
 
@@ -14,17 +14,17 @@
             this.context = context;
         }
 
-        public IEnumerable<Product> GetProducts() 
+        public IEnumerable<Product> GetProducts()
         {
             return this.context.Products.OrderBy(p => p.Name);
         }
 
-        public Product GetProduct(int id) 
+        public Product GetProduct(int id)
         {
             return this.context.Products.Find(id);
         }
 
-        public void AddProduct(Product p) 
+        public void AddProduct(Product p)
         {
             this.context.Products.Add(p);
         }
@@ -39,12 +39,12 @@
             this.context.Products.Remove(p);
         }
 
-        public async Task<bool> SaveAllAsync() 
+        public async Task<bool> SaveAllAsync()
         {
             return await this.context.SaveChangesAsync() > 0;
         }
 
-        public bool ProductExists(int id) 
+        public bool ProductExists(int id)
         {
             return this.context.Products.Any(p => p.Id == id);
         }
