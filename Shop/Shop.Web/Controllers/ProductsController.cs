@@ -83,8 +83,7 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Product product)
-        {
-        
+        {        
             if (ModelState.IsValid)
             {
                 try
@@ -133,8 +132,7 @@
         {
             var product = this.repository.GetProduct(id);
             this.repository.RemoveProduct(product);
-            await this.repository.SaveAllAsync();
-                
+            await this.repository.SaveAllAsync();                
             return RedirectToAction(nameof(Index));
         }
 
