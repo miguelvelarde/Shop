@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shop.Web.Data;
+using Shop.Web.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,17 @@ namespace Shop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequireDigit = false;
+                config.Password.RequiredUniqueChars = 0;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
+                config.Password.RequiredLength = 6;
+            }).AddEntityFrameworkStores<DataContext>();
+
             services.AddDbContext<DataContext>(cfg =>
             {
                 cfg.UseSqlServer(
@@ -54,7 +67,7 @@ namespace Shop.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
