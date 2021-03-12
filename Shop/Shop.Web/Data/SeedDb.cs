@@ -13,7 +13,7 @@
         private readonly IUserHelper userHelper;
         private Random random;
 
-        public SeedDb(DataContext context, UserHelper userHelper)
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             this.context = context;
             this.userHelper = userHelper;
@@ -24,7 +24,7 @@
         {
             await this.context.Database.EnsureCreatedAsync();
 
-            var user = await this.userHelper.GetUserByEmail("mvelarde@astrum.com.mx");
+            var user = await this.userHelper.GetUserByEmailAsync("mvelarde@astrum.com.mx");
             
             if (user == null) 
             {

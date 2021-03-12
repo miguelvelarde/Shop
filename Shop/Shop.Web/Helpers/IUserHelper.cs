@@ -6,8 +6,8 @@
 
     public interface IUserHelper
     {
-        Task<User> GetUserByEmail(string email);
+        public Task<User> GetUserByEmailAsync(string email);
 
-        Task<IdentityResult> AddUserAsync(User user, string password);
+        public Task<IdentityResult> AddUserAsync(User user, string password);
     }
 }
