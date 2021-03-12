@@ -19,7 +19,7 @@
             return await this.userManager.CreateAsync(user, password);
         }
 
-        public async Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUserByEmailAsync(string email)
         {
             return await this.userManager.FindByEmailAsync(email);
         }
