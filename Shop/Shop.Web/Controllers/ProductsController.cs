@@ -64,14 +64,14 @@
         }
 
         // GET: Products/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = this.repository.GetByIdAsync(id.Value);
+            var product = await this.repository.GetByIdAsync(id.Value);
             if (product == null)
             {
                 return NotFound();
